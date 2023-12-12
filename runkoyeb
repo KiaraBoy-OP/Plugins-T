@@ -1,0 +1,4 @@
+#! /bin/bash
+
+echo "!!!   Starting to Run KiaraBot on Koyeb   !!!"
+python3 -m TelethonKiara
