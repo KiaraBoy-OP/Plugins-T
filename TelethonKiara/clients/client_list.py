@@ -48,7 +48,7 @@ async def clients_list():
 async def client_id(event, botid=None, is_html=None):
     if botid is not None:
         uid = await event.client(GetFullUserRequest(botid))
-        Kiara_X_Assistant = uid.users[0].id
+        Kiara_X_Assistant = uid.id
         KIARA_USER = uid.users[0].first_name
         _mention = f"[{KIARA_USER}](tg://user?id={Kiara_X_Assistant})"
         _html = f"<a href='tg://user?id={Kiara_X_Assistant}'>{KIARA_USER}</a>"
