@@ -49,7 +49,7 @@ async def client_id(event, botid=None, is_html=None):
     if botid is not None:
         uid = await event.client(GetFullUserRequest(botid))
         Kiara_X_Assistant = uid.id
-        KIARA_USER = uid.users[0].first_name
+        KIARA_USER = uid.first_name
         _mention = f"[{KIARA_USER}](tg://user?id={Kiara_X_Assistant})"
         _html = f"<a href='tg://user?id={Kiara_X_Assistant}'>{KIARA_USER}</a>"
         kiara_mention = _html if is_html else _mention
@@ -62,7 +62,6 @@ async def client_id(event, botid=None, is_html=None):
         _html = f"<a href='tg://user?id={Kiara_X_Assistant}'>{KIARA_USER}</a>"
         kiara_mention = _html if is_html else _mention
     return Kiara_X_Assistant, KIARA_USER, kiara_mention
-
 
 async def get_user_id(event, ids):
     if str(ids).isdigit():
