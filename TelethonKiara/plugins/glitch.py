@@ -4,7 +4,6 @@
 # Info -> Glitch plugin for Userge made by @Krishna_Singhal in Pyrogram.
 # 
 # Ported from Pyrogram to Telethon by @Kiara_X_Assistant
- for †hê Hêllẞø†
 # 
 # USE WITH CREDITS !!
 ##################################
