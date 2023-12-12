@@ -141,7 +141,7 @@ async def _(event):
 async def _(event):
     reason = ""
     Kiara_X_Assistant, _, kiara_mention = await client_id(event)
-     kiara = await eor(event, f"`Gban in action...`")
+    kiara = await eor(event, f"`Gban in action...`")
     reply = await event.get_reply_message()
     if event.reply_to_msg_id:
         userid = (await event.get_reply_message()).sender_id
