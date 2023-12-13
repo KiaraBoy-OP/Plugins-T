@@ -46,7 +46,7 @@ async def _(event):
     last_name = (
         last_name.replace("\u2060", "") if last_name else ("Last Name not found")
     )
-    user_bio = replied_user.full_user.about
+    user_bio = html.escape(replied_user.about)
     if user_bio is not None:
         user_bio = html.escape(replied_user.full_user.about)
     common_chats = replied_user.full_user.common_chats_count
