@@ -2,19 +2,19 @@ import datetime
 import os
 import random
 import requests
-
 from PIL import Image, ImageDraw, ImageFont
 from TelethonKiara.plugins import *
 
 
 @kiara_cmd(pattern="logo([\s\S]*)")
 async def logo(event):
-    kiara = await eor(event, "`Processing.....`")
-    _, _, kiara_mention = await client_id(event)
-    text = event.text
-    lists = text.split(" ", 1)
-    if len(lists) == 1:
-        return await parse_error(kiara, "Give some text to make Logo")
+    try:
+        kiara = await eor(event, "`Processing.....`")
+        _, _, kiara_mention = await client_id(event)
+        text = event.text
+        lists = text.split(" ", 1)
+        if len(lists) == 1:
+            return await parse_error(kiara, "Give some text to make Logo")
     if (text[5:]).startswith("-"):
         _type = (lists[0])[6:]
     else:
@@ -57,16 +57,19 @@ async def logo(event):
     end = datetime.datetime.now()
     ms = (end - start).seconds
     await event.client.send_file(
-        event.chat_id,
-        "logo.png",
-        caption=f"**Made by:** {kiara_mention} \n**Time taken:** `{ms} seconds`",
-        reply_to=reply,
-    )
-    await kiara.delete()
-    os.remove(_font)
-    os.remove("logo.png")
-    os.remove("logo_bg.jpg")
+            event.chat_id,
+            "logo.png",
+            caption=f"**Made by:** {kiara_mention} \n**Time taken:** `{ms} seconds`",
+            reply_to=reply,
+        )
+        await kiara.delete()
+        os.remove(_font)
+        os.remove("logo.png")
+        os.remove("logo_bg.jpg")
 
+except Exception as e:
+        print(f"An error occurred: {e}")
+        await kiara.edit("An error occurred while processing the request.")
 
 CmdHelp("logos").add_command(
     "logo", "-{type} {logo text}", "Makes a logo with the given text. If replied to a picture makes logo on that else gets random BG.", f"logo Kiarabot \n{hl}logo-car KiaraBot \n{hl}logo-anime KiaraBot \netc..."
