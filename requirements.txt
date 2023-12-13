@@ -24,6 +24,7 @@ moviepy
 nekos.py
 opencv-python-headless
 Pillow
+Pillow==8.4.0
 psycopg2
 pyfiglet
 PyGithub
