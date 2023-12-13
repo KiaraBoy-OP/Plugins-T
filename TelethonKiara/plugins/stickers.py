@@ -408,7 +408,7 @@ async def _(event):
         await kiara.edit(f"{sixth.text}")
 
 
-@Kiara_cmd(pattern="text(?:\s|$)([\s\S]*)")
+@kiara_cmd(pattern="text(?:\s|$)([\s\S]*)")
 async def sticklet(event):
     R = random.randint(0, 256)
     G = random.randint(0, 256)
