@@ -48,7 +48,7 @@ async def _(event):
     )
     user_bio = html.escape(replied_user.about)
     if user_bio is not None:
-        user_bio = html.escape(replied_user.full_user.about)
+        user_bio = html.escape(replied_user.about)
     common_chats = replied_user.full_user.common_chats_count
     try:
         dc_id, location = get_input_location(replied_user.full_user.profile_photo)
