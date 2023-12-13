@@ -96,7 +96,7 @@ async def kiara_a(event):
         await kiara[0].click(event.chat_id)
         if event.sender_id == userid:
             await event.delete()
-    except (noin, dedbot):
+    except (noin, dedbot, BotInlineDisabledError):  # Handle BotInlineDisabledError
         await eor(
             event,
             msg.format(am, telethon_version, kiarabot_version, uptime, abuse_m, is_sudo),
