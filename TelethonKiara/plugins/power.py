@@ -16,7 +16,7 @@ async def restart(event):
         app = Heroku.apps()[Config.HEROKU_APP_NAME]
         app.restart()
     else:
-        await eor(event, f"✅ **Restarted Hêllẞø†** \n**Type** `{hl}ping` **after 1 minute to check if I am working !**")
+        await eor(event, f"✅ **Restarted Ừʂɛɤẞø†** \n**Type** `{hl}ping` **after 1 minute to check if I am working !**")
         await event.client.disconnect()
 
 
@@ -113,7 +113,7 @@ CmdHelp("power").add_command(
 ).add_command(
     "reload", None, "Reloads the bot DB and SQL variables without deleting any external plugins if installed."
 ).add_command(
-    "shutdown", None, "Turns off Hêllẞø†. Userbot will stop working unless you manually turn it on."
+    "shutdown", None, "Turns off Ừʂɛɤẞø†. Userbot will stop working unless you manually turn it on."
 ).add_command(
     "svar", "<variable name> <variable value>", "Sets the variable to SQL variables without restarting the bot.", "svar ALIVE_PIC https://telegra.ph/file/57bfe195c88c5c127a653.jpg"
 ).add_command(
