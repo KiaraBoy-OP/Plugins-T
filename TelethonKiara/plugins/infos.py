@@ -30,7 +30,7 @@ async def _(event):
         return False
     replied_user_profile_photos = await event.client(
         GetUserPhotosRequest(
-            user_id=replied_user.users[0].id, offset=42, max_id=0, limit=80
+            user_id=replied_user.user.id, offset=42, max_id=0, limit=80
         )
     )
     replied_user_profile_photos_count = "NaN"
