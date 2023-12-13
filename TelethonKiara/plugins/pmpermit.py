@@ -75,7 +75,7 @@ if str(Config.PM_PERMIT).lower() not in disabled_list:
         sender = await event.client(GetFullUserRequest(await event.get_input_chat()))
         if str(event.chat_id) == str(Kiara_X_Assistant):
             return
-       if sender.user.bot:
+        if sender.user.bot:
             return
         if sender.users[0].verified:
             return
