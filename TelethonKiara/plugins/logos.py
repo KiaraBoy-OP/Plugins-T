@@ -67,10 +67,6 @@ async def logo(event):
         os.remove("logo.png")
         os.remove("logo_bg.jpg")
 
-except Exception as e:
-        print(f"An error occurred: {e}")
-        await kiara.edit("An error occurred while processing the request.")
-
 CmdHelp("logos").add_command(
     "logo", "-{type} {logo text}", "Makes a logo with the given text. If replied to a picture makes logo on that else gets random BG.", f"logo Kiarabot \n{hl}logo-car KiaraBot \n{hl}logo-anime KiaraBot \netc..."
 ).add_info(
