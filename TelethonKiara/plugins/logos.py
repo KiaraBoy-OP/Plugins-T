@@ -13,7 +13,7 @@ def create_logo(text):
     font = ImageFont.load_default()
 
     # Calculate text size and position
-    text_size = draw.textsize(text, font=font)
+    text_size = draw.textsize(text, font)
     text_position = ((img.width - text_size[0]) // 2, (img.height - text_size[1]) // 2)
 
     # Draw the text on the image
