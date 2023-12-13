@@ -42,7 +42,7 @@ async def _(event):
     first_name = html.escape(replied_user.user.first_name)
     if first_name is not None:
         first_name = first_name.replace("\u2060", "")
-    last_name = replied_user.users[0].last_name
+    last_name = html.escape(replied_user.user.last_name)
     last_name = (
         last_name.replace("\u2060", "") if last_name else ("Last Name not found")
     )
