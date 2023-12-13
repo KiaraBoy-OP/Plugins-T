@@ -1,62 +1,77 @@
+import datetime
 import os
 import random
+import requests
+
 from PIL import Image, ImageDraw, ImageFont
-from telethon import events
+from TelethonHell.plugins import *
 
-# Function to generate a random background color
-def random_color():
-    return tuple(random.randint(0, 255) for _ in range(3))
 
-# Function to create a logo with random text on a random background
-async def create_random_logo(event, text):
-    # Generate a random background color
-    bg_color = random_color()
-
-    # Create a blank image with the random background color
-    img_size = (300, 200)
-    img = Image.new("RGB", img_size, bg_color)
+@hell_cmd(pattern="logo([\s\S]*)")
+async def logo(event):
+    hell = await eor(event, "`Processing.....`")
+    _, _, hell_mention = await client_id(event)
+    text = event.text
+    lists = text.split(" ", 1)
+    if len(lists) == 1:
+        return await parse_error(hell, "Give some text to make Logo")
+    if (text[5:]).startswith("-"):
+        _type = (lists[0])[6:]
+    else:
+        _type = random.choice(rand_bg)
+    _fnt = random.choice(rand_font)
+    query = lists[1]
+    start = datetime.datetime.now()
+    reply = await event.get_reply_message()
+    if reply and reply.media and reply.media.photo:
+        await reply.download_media("temp_bg.jpg")
+        await hell.edit("__Downloaded replied photo... starting to make logo__")
+    else:
+        _unsp = await unsplash(_type, 1)
+        _bg = requests.get(_unsp[0])
+        with open("temp_bg.jpg", "wb") as file:
+            file.write(_bg.content)
+        await hell.edit(f"__Downloaded__ `{_type}` __background... starting to make logo__")
+    img = Image.open("temp_bg.jpg")
+    img.resize((5000, 5000)).save("logo_bg.jpg")
+    os.remove("temp_bg.jpg")
+    img = Image.open("logo_bg.jpg")
+    wid, hig = img.size
     draw = ImageDraw.Draw(img)
-
-    # Choose a random font and size
-    font = ImageFont.load_default()
-
-    # Calculate text size and position
-    text_size = font.getsize(text)
-    text_position = ((img.width - text_size[0]) // 2, (img.height - text_size[1]) // 2)
-
-    # Draw the text on the image
-    draw.text(text_position, text, font=font, fill=(255, 255, 255))  # White text
-
-    # Save the image
-    img_path = "random_logo.png"
-    img.save(img_path)
-
-    # Send the image as a file
+    font_ = requests.get(_fnt)
+    _font = "logo_font.ttf"
+    with open(_font, "wb") as file:
+        file.write(font_.content)
+    font_size = await get_font_size(_font, query, img)
+    font = ImageFont.truetype(_font, font_size)
+    w, h = draw.textsize(query, font=font)
+    draw.text(
+        ((wid - w) / 2, (hig - h) / 2),
+        query,
+        font=font,
+        fill="white",
+        stroke_width=8,
+        stroke_fill="black",
+    )
+    img.save("logo.png", "PNG")
+    end = datetime.datetime.now()
+    ms = (end - start).seconds
     await event.client.send_file(
         event.chat_id,
-        img_path,
-        caption=f"Random Logo: {text}",
-        force_document=True,
-        reply_to=event.message.id,
+        "logo.png",
+        caption=f"**Made by:** {hell_mention} \n**Time taken:** `{ms} seconds`",
+        reply_to=reply,
     )
+    await hell.delete()
+    os.remove(_font)
+    os.remove("logo.png")
+    os.remove("logo_bg.jpg")
 
-    # Cleanup: Remove the temporary image file
-    os.remove(img_path)
 
-# Event handler for the .logo command
-@events.register(events.NewMessage(pattern=r"^.logo (.+)", outgoing=True))
-async def logo_command_handler(event):
-    # Extract the text from the command
-    text = event.pattern_match.group(1)
-
-    # Generate a random text if not provided
-    if not text:
-        text = "Lorem Ipsum"  # Replace with your preferred default text
-
-    # Create the random logo
-    await create_random_logo(event, text)
-
-# Add a help command for the .logo command
-@events.register(events.NewMessage(pattern=r"^.help logo", outgoing=True))
-async def help_command_handler(event):
-    await event.respond(".logo <text> - Create a logo with the specified text (or random text).")
+CmdHelp("logos").add_command(
+    "logo", "-{type} {logo text}", "Makes a logo with the given text. If replied to a picture makes logo on that else gets random BG.", f"logo Hellbot \n{hl}logo-car HellBot \n{hl}logo-anime HellBot \netc..."
+).add_info(
+    "Logo Maker."
+).add_warning(
+    "✅ Harmless Module."
+).add()
