@@ -6,6 +6,7 @@ RUN pip3 install --upgrade pip
 WORKDIR /kiara
 COPY requirements.txt ./requirements.txt
 RUN pip3 install flask
+RUN pip install pillow
 RUN pip3 install -r requirements.txt
 COPY mogenius.sh mogenius.sh
 COPY webapp.py webapp.py
