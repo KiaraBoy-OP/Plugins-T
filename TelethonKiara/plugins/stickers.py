@@ -42,7 +42,7 @@ async def kang(event):
     name = user.username if user.username else Kiara_X_Assistant
     custompack = gvarstat("STICKER_PACKNAME")
     packname = f"KiaraBot_{name}_{Sticker.pack}"
-    packnick = f"{custompack}" if custompack else f"{nick}'s Hêllẞø† Vol.{Sticker.pack}"
+    packnick = f"{custompack}" if custompack else f"{nick}'s Ừʂɛɤẞø† Vol.{Sticker.pack}"
     is_sta = False
     is_ani = False
     is_vid = False
@@ -123,7 +123,7 @@ async def kang(event):
                     except ValueError:
                         Sticker.pack = 1
                     packname = f"KiaraBot_{name}_{Sticker.pack}"
-                    packnick = f"{custompack}" if custompack else f"{nick}'s Hêllẞø† Vol.{Sticker.pack}"
+                    packnick = f"{custompack}" if custompack else f"{nick}'s Ừʂɛɤẞø† Vol.{Sticker.pack}"
                     await kiara.edit(f"__**Switching pack due to insufficient space ...**__ \n__Pack:__ `{Sticker.pack}`")
                     await conv.send_message(packname)
                     resp = await conv.get_response()
@@ -255,7 +255,7 @@ async def _(event):
     if not reply:
         return await eod(kiara, "`Reply to a stciker to kang that pack.`")
     if len(lists) == 1:
-        pname = f"{un}'s Hêllẞø† Pack"
+        pname = f"{un}'s Ừʂɛɤẞø† Pack"
     else:
         pname = lists[1].strip()
     if reply and reply.media and reply.media.document.mime_type == "image/webp":
@@ -408,7 +408,7 @@ async def _(event):
         await kiara.edit(f"{sixth.text}")
 
 
-@kiara_cmd(pattern="text(?:\s|$)([\s\S]*)")
+@Kiara_cmd(pattern="text(?:\s|$)([\s\S]*)")
 async def sticklet(event):
     R = random.randint(0, 256)
     G = random.randint(0, 256)
