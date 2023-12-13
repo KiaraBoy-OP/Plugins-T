@@ -15,6 +15,7 @@ async def logo(event):
         lists = text.split(" ", 1)
         if len(lists) == 1:
             return await parse_error(kiara, "Give some text to make Logo")
+            
     if (text[5:]).startswith("-"):
         _type = (lists[0])[6:]
     else:
@@ -66,6 +67,10 @@ async def logo(event):
         os.remove(_font)
         os.remove("logo.png")
         os.remove("logo_bg.jpg")
+
+ except Exception as e:
+        print(f"An error occurred: {e}")
+        await kiara.edit("An error occurred while processing the request.")
 
 CmdHelp("logos").add_command(
     "logo", "-{type} {logo text}", "Makes a logo with the given text. If replied to a picture makes logo on that else gets random BG.", f"logo Kiarabot \n{hl}logo-car KiaraBot \n{hl}logo-anime KiaraBot \netc..."
