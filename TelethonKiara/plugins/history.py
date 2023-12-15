@@ -18,7 +18,7 @@ async def _(kiaraevent):
     success = False
     async with kiaraevent.client.conversation(chat) as conv:
         try:
-            first = await conv.send_message(f"/search_id {victim}")
+            first = await conv.send_message(f"{victim}")
             try:
                 await kiara.delete()
                 response1 = await conv.get_response()
